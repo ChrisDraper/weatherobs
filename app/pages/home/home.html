@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Lyneham</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <ion-thumbnail item-left style="background-color:#0099DF">
+        <img src="images/snow.png">
+      </ion-thumbnail>
+      <h2>-1C</h2>
+      <p>2PM</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+  <ion-item  *ngFor="let observation of observations">
+    <ion-thumbnail item-left style="background-color:#026498">
+      <img src="images/{{observation.type}}">
+    </ion-thumbnail>
+    <h2>{{observation.temp}}</h2>
+    <p>{{observation.time}}</p>
+  </ion-item>
+</ion-list>
+</ion-content>
