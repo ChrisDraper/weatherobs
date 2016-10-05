@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
+import { Http } from '@angular/http';
+import {Data} from '../../providers/data/data';
 
 @Component({
   templateUrl: 'build/pages/home/home.html'
@@ -7,24 +9,41 @@ import { NavController } from 'ionic-angular';
 export class HomePage {
 
 	observations: any;
+  latestObs: any;
 
-	constructor(public navCtrl: NavController) {
-		this.observations = [
-            {type: 'snow.png',
-            temp: '-1C',
-            time: '2PM'},
-            {type: 'lsnow.png',
-            temp: '-1C',
-            time: '1PM'},
-            {type: 'dcloud.png',
-            temp: '-1.1C',
-            time: '12PM'},
-            {type: 'dcloud.png',
-            temp: '-1.1C',
-            time: '11AM'},
-            {type: 'lcloud.png',
-            temp: '-1.0C',
-            time: '10AM'},
-        ];
+  
+  cityid: string;
+  appid: string;
+
+	constructor(public navCtrl: NavController, public dataService: Data, private http: Http, public alertCtrl: AlertController) {
+
+    // Latest observation
+    this.latestObs = this.dataService.getLatestObservation();
+    
+    this.cityid = '2652318';
+    this.appid = '93d084a13ebef466e99ba2ccda6458f7';
+    this.http.get('http://api.openweathermap.org/data/2.5/weather?lat=51.431443&lon=-2.189674&units=metric&APPID=' + this.appid)
+              .map(res => res.json())
+              .subscribe(
+                  data => {
+                    this.latestObs = this.dataService.formatObservation(data);
+                  },
+                  error => {
+                      this.showConectionErrAlert();
+                  });
+
+    // Recent observations (After the latest observation)
+		this.observations = this.dataService.getRecentObservations();
+
 	}
+
+  showConectionErrAlert() {
+      let alert = this.alertCtrl.create({
+        title: 'Oh bother!!',
+        subTitle: 'Connection to latest data is unavailable.',
+        buttons: ['FAIR ENOUGH']
+      });
+      alert.present();
+  }
+
 }
