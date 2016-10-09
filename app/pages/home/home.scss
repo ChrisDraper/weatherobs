@@ -1,3 +1,34 @@
-.home-page {
-  
+ion-content {
+     background: rgba(73,155,234,1);
+    background: -moz-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(12,85,163,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(73,155,234,1)), color-stop(100%, rgba(12,85,163,1)));
+    background: -webkit-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(12,85,163,1) 100%);
+    background: -o-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(12,85,163,1) 100%);
+    background: -ms-linear-gradient(left, rgba(73,155,234,1) 0%, rgba(12,85,163,1) 100%);
+    background: linear-gradient(to right, rgba(73,155,234,1) 0%, rgba(12,85,163,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#0c55a3', GradientType=1 );
 }
+
+.home-page ion-card ion-thumbnail[item-left]{
+    background-color: #0099DF;
+    padding: 5px;
+    float: left;
+    height: 60px;
+    width: 60px;
+    border-radius: 4px;
+    margin-top: 0;
+}
+
+.home-page ion-list ion-thumbnail[item-left]{
+    background-color: #026498;
+    padding: 5px;
+    float: left;
+    height: 40px;
+    width: 40px;
+    border-radius: 4px;
+}
+
+.home-page ion-list ion-thumbnail img {
+}
+/* #0099DF */
+/* #026498 */
